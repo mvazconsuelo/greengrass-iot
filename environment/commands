@@ -1,0 +1,102 @@
+#Install algunas dependencias
+sudo apt install default-jdk
+sudo apt  install awscli
+apt install unzip -y
+
+#install GreenGrass cli
+##https: //docs.aws.amazon.com/es_es/greengrass/v2/developerguide/install-gg-cli.html
+
+#Create policy
+##Nombre de la policy: greengrass-iot-policy
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "CreateTokenExchangeRole",
+			"Effect": "Allow",
+			"Action": [
+				"iam:AttachRolePolicy",
+				"iam:CreatePolicy",
+				"iam:CreateRole",
+				"iam:GetPolicy",
+				"iam:GetRole",
+				"iam:PassRole"
+			],
+			"Resource": [
+				"arn:aws:iam::785995043299:role/GreengrassV2TokenExchangeRole",
+				"arn:aws:iam::785995043299:policy/GreengrassV2TokenExchangeRoleAccess"
+			]
+		},
+		{
+			"Sid": "CreateIoTResources",
+			"Effect": "Allow",
+			"Action": [
+				"iot:AddThingToThingGroup",
+				"iot:AttachPolicy",
+				"iot:AttachThingPrincipal",
+				"iot:CreateKeysAndCertificate",
+				"iot:CreatePolicy",
+				"iot:CreateRoleAlias",
+				"iot:CreateThing",
+				"iot:CreateThingGroup",
+				"iot:DescribeEndpoint",
+				"iot:DescribeRoleAlias",
+				"iot:DescribeThingGroup",
+				"iot:GetPolicy"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "DeployDevTools",
+			"Effect": "Allow",
+			"Action": [
+				"greengrass:CreateDeployment",
+				"iot:CancelJob",
+				"iot:CreateJob",
+				"iot:DeleteThingShadow",
+				"iot:DescribeJob",
+				"iot:DescribeThing",
+				"iot:DescribeThingGroup",
+				"iot:GetThingShadow",
+				"iot:UpdateJob",
+				"iot:UpdateThingShadow"
+			],
+			"Resource": "*"
+		}
+	]
+}
+
+
+---
+#create policy ecr, realizar un attachment en rol GreengrassV2TokenExchangeRole
+##nombre de la policy: greengrass-ecr-iot-policy
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"ecr:CreateRepository",
+				"ecr:GetDownloadUrlForLayer",
+				"ecr:BatchGetImage",
+				"ecr:CompleteLayerUpload",
+				"ecr:GetAuthorizationToken",
+				"ecr:UploadLayerPart",
+				"ecr:InitiateLayerUpload",
+				"ecr:BatchCheckLayerAvailability",
+				"ecr:PutImage"
+			],
+			"Resource": "*"
+		}
+	]
+}
+
+
+#install docker
+curl -fsSL https: //get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+Create registry para imagenes docker
+aws ecr create-repository --repository-name publisher-container-greengrass --region us-east-1
+aws ecr create-repository --repository-name subscriber-container-greengrass --region us-east-1
+
