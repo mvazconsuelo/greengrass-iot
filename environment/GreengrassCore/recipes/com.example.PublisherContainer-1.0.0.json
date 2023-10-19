@@ -38,11 +38,11 @@
         "os": "all"
       },
       "Lifecycle": {
-        "Run": "docker run --rm -t -v /greengrass/v2:/greengrass/v2 -v $AWS_GG_NUCLEUS_DOMAIN_SOCKET_FILEPATH_FOR_COMPONENT:$AWS_GG_NUCLEUS_DOMAIN_SOCKET_FILEPATH_FOR_COMPONENT -e AWS_REGION -e SVCUID -e AWS_GG_NUCLEUS_DOMAIN_SOCKET_FILEPATH_FOR_COMPONENT -e AWS_CONTAINER_AUTHORIZATION_TOKEN -e AWS_CONTAINER_CREDENTIALS_FULL_URI 785995043299.dkr.ecr.us-east-1.amazonaws.com/publisher-container-greengrass:latest"
+        "Run": "docker run --rm -t -v /greengrass/v2:/greengrass/v2 -v $AWS_GG_NUCLEUS_DOMAIN_SOCKET_FILEPATH_FOR_COMPONENT:$AWS_GG_NUCLEUS_DOMAIN_SOCKET_FILEPATH_FOR_COMPONENT -e AWS_REGION -e SVCUID -e AWS_GG_NUCLEUS_DOMAIN_SOCKET_FILEPATH_FOR_COMPONENT -e AWS_CONTAINER_AUTHORIZATION_TOKEN -e AWS_CONTAINER_CREDENTIALS_FULL_URI 454717180576.dkr.ecr.us-east-1.amazonaws.com/publisher-container-greengrass:latest"
       },
       "Artifacts": [
         {
-          "Uri": "docker:785995043299.dkr.ecr.us-east-1.amazonaws.com/publisher-container-greengrass:latest",
+          "Uri": "docker:454717180576.dkr.ecr.us-east-1.amazonaws.com/publisher-container-greengrass:latest",
           "Unarchive": "NONE",
           "Permission": {
             "Read": "OWNER",
